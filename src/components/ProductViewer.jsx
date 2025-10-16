@@ -1,25 +1,26 @@
-import React from 'react'
 import useMacbookStore from "../store";
 import clsx from "clsx";
 import { Canvas } from "@react-three/fiber";
-import { Box, OrbitControls } from "@react-three/drei";
-
+import StudioLights from './three/StudioLights';
+import ModelSwitcher from './three/ModelSwitcher';
+import { useMediaQuery } from "react-responsive";
 
 const ProductViewer = () => {
     const { color, setColor, scale, setScale } = useMacbookStore();
-
+    const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
     return (
         <section id="product-viewer">
             <h2>take a closer look.</h2>
             <div className="controls">
-                <p className="info">Macbook pro 16" in {color}</p>
+                <p className="info">Macbook pro Available in 14" and 16"</p>
+                <p className="info">Silver and Space Grey colors</p>
                 <div className='flex-center gap-5 mt-5'>
                     <div className="color-control">
                         <div className={clsx('bg-neutral-300', color === '#adb5db' && 'active')} 
                             onClick={() => setColor('#adb5db')} 
                         />
-                        <div className={clsx('bg-neutral-900', color === '#2e2c2e' && 'active')} 
-                            onClick={() => setColor('#2e2c2e')}  
+                        <div className={clsx('bg-neutral-900', color === '#333334' && 'active')} 
+                            onClick={() => setColor('#333334')}  
                         />
                     </div>
                     <div className="size-control">
@@ -36,8 +37,12 @@ const ProductViewer = () => {
             </div>
             <p className="text-white text-4xl">Render Canvas</p>
             <Canvas id='canvas' camera={{position:[0, 2, 5], fov:50, near:0.1, far:100 }}>
-                <Box position={[0,1,0]} scale={10*scale} material-color={color} />
-                <OrbitControls enableZoom={false} />
+                {/* <Box position={[0,1,0]} scale={10*scale} material-color={color} /> */}
+                {/* <ambientLight intensity={2} /> replaced for StudioLight  */}
+                <StudioLights />
+                {/* <MacbookModel14 scale={0.06} position={[0,1,0]} />
+                <OrbitControls enableZoom={false} /> */}
+                <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
             </Canvas>
 
         </section>
