@@ -5,6 +5,7 @@ import ProductViewer from './components/ProductViewer.jsx'
 import Footer from './components/footer.jsx'
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from 'gsap/all'
+import Showcase from './components/Showcase.jsx'
 
 
 // gsap should be available for the entire app
@@ -16,6 +17,7 @@ const App = () => {
         <NavBar />
         <Hero />
         <ProductViewer />
+        <Showcase />
         <Footer />
     </main>
   )
