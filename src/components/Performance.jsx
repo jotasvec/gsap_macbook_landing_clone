@@ -70,7 +70,7 @@ const Performance = () => {
                         key={image.id} 
                         className={image.id}
                         src={image.src} 
-                        alt={image.id} 
+                        alt={`Performance Image ${image.id}`} 
                     />
                 ))}
             </div>
